@@ -81,23 +81,26 @@
                                         <![CDATA[
                                         me.CreateTextFile({
                                             path: "/README.txt",
-                                            data: "Each sub-folder is a GIT repository"
+                                            data: "Each sub-folder is a GIT repository",
+                                            overwrite: true
                                         });
                                         
                                         me.CreateTextFile({
                                         	path: "/auto-commit.ps1",
                                         	data: 
-                                            "$now = Get-Date -Format 'dd-MMM-yyyy HH:mm:ss'\n" +
-                                            "Write-Output 'Auto-commit enabled at $now - Exit with Control-C'\n" +
-                                        	"while ($true) {\n" +
-                                          	"	$projects = Get-ChildItem -Path . -Directory -Name\n" +
-                                          	"	foreach ($project in $projects) {\n" +
-                                            "	cd $project\n" +
-                                            "	git add .\n" +
-                                            "	git commit -m 'auto' | Out-Null\n" +
-                                            "	cd ..\n" +
-                                          	"}\n" +
-                                          	"Start-Sleep -Seconds 60"
+                                                "$now = Get-Date -Format 'dd-MMM-yyyy HH:mm:ss'\n" +
+                                                "Write-Output 'Auto-commit enabled at $now - Exit with Control-C'\n" +
+                                                "while ($true) {\n" +
+                                                "	$projects = Get-ChildItem -Path . -Directory -Name\n" +
+                                                "	foreach ($project in $projects) {\n" +
+                                                "		cd $project\n" +
+                                                "		git add .\n" +
+                                                "		git commit -m 'auto' | Out-Null\n" +
+                                                "		cd ..\n" +
+                                                "	}\n" +
+                                                "Start-Sleep -Seconds 60\n" +
+                                                "}",
+                                        	overwrite: true   
                                         });
                                         ]]>
                                         </code>
