@@ -144,7 +144,7 @@
                                         	tags: undefined /* TAGS */
                                         });
                                         
-                                        let result = "Project " + ProjectName + " exported for source control " + " to repository " + Repository;
+                                        let result = "Project " + ProjectName + " exported for source control " + " to repository " + me.Repository;
                                         ]]>
                                         </code>
                                     </Row>
@@ -185,7 +185,7 @@
                                         	entityFilter: undefined /* INFOTABLE */
                                         });
                                         
-                                        let result = "Project " + ProjectName + " imported from source control repository " + Repository;
+                                        let result = "Project " + ProjectName + " imported from source control repository " + me.Repository;
                                         ]]>
                                         </code>
                                     </Row>
