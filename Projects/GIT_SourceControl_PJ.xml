@@ -7,7 +7,7 @@
         <Project
          artifactId=""
          aspect.projectType="Component"
-         dependsOn="{&quot;extensions&quot;:&quot;&quot;,&quot;projects&quot;:&quot;LEF.LeFabbriche.PJ:1.0.0&quot;}"
+         dependsOn="{&quot;extensions&quot;:&quot;&quot;,&quot;projects&quot;:&quot;&quot;}"
          description=""
          documentationContent=""
          groupId=""
