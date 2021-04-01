@@ -33,7 +33,30 @@
             <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
             <ConfigurationTables></ConfigurationTables>
             <ThingShape>
-                <PropertyDefinitions></PropertyDefinitions>
+                <PropertyDefinitions>
+                    <PropertyDefinition
+                     aspect.cacheTime="0.0"
+                     aspect.dataChangeType="VALUE"
+                     aspect.isPersistent="true"
+                     baseType="JSON"
+                     category=""
+                     description=""
+                     isLocalOnly="false"
+                     name="Projects"
+                     ordinal="3"></PropertyDefinition>
+                    <PropertyDefinition
+                     aspect.cacheTime="0.0"
+                     aspect.dataChangeType="VALUE"
+                     aspect.defaultValue="GIT_Repository_FR"
+                     aspect.isPersistent="true"
+                     aspect.thingTemplate="FileRepository"
+                     baseType="THINGNAME"
+                     category=""
+                     description=""
+                     isLocalOnly="false"
+                     name="Repository"
+                     ordinal="2"></PropertyDefinition>
+                </PropertyDefinitions>
                 <ServiceDefinitions>
                     <ServiceDefinition
                      aspect.isAsync="false"
@@ -96,6 +119,22 @@
                              name="Repository"
                              ordinal="1"></FieldDefinition>
                         </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="Test">
+                        <ResultType
+                         baseType="STRING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
                     </ServiceDefinition>
                 </ServiceDefinitions>
                 <EventDefinitions></EventDefinitions>
@@ -186,16 +225,133 @@
                             </ConfigurationTable>
                         </ConfigurationTables>
                     </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="Test">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        let result = "Error";
+                                        if (Projects["LEF.LeFabbriche.PJ2"]) {    
+                                            result = "OK";
+                                        }
+                                        
+                                        let json = JSON.parse( me.Projects );
+                                        
+                                        result = json.projects[0];
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
                 </ServiceImplementations>
-                <Subscriptions></Subscriptions>
+                <Subscriptions>
+                    <Subscription
+                     description=""
+                     enabled="true"
+                     eventName="Timer"
+                     name="ExportOnTimer"
+                     source="GIT_ExportTimer_TM"
+                     sourceProperty=""
+                     sourceType="Thing">
+                        <ServiceImplementation
+                         description=""
+                         handlerName="Script"
+                         name="ExportOnTimer">
+                            <ConfigurationTables>
+                                <ConfigurationTable
+                                 dataShapeName=""
+                                 description=""
+                                 isMultiRow="false"
+                                 name="Script"
+                                 ordinal="0">
+                                    <DataShape>
+                                        <FieldDefinitions>
+                                            <FieldDefinition
+                                             baseType="STRING"
+                                             description="code"
+                                             name="code"
+                                             ordinal="0"></FieldDefinition>
+                                        </FieldDefinitions>
+                                    </DataShape>
+                                    <Rows>
+                                        <Row>
+                                            <code>
+                                            <![CDATA[
+                                            if ( me.Repository ) {
+                                                let json = JSON.parse( me.Projects );
+                                                json.projects.forEach(project => {
+                                                    if (Projects[project]) {
+                                                        me.Export({ 
+                                                            Repository: me.Repository, 
+                                                            ProjectName: project 
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                            ]]>
+                                            </code>
+                                        </Row>
+                                    </Rows>
+                                </ConfigurationTable>
+                            </ConfigurationTables>
+                        </ServiceImplementation>
+                    </Subscription>
+                </Subscriptions>
             </ThingShape>
             <PropertyBindings></PropertyBindings>
             <RemotePropertyBindings></RemotePropertyBindings>
             <RemoteServiceBindings></RemoteServiceBindings>
             <RemoteEventBindings></RemoteEventBindings>
-            <AlertConfigurations></AlertConfigurations>
+            <AlertConfigurations>
+                <AlertDefinitions
+                 name="Projects"></AlertDefinitions>
+                <AlertDefinitions
+                 name="Repository"></AlertDefinitions>
+            </AlertConfigurations>
             <ImplementedShapes></ImplementedShapes>
-            <ThingProperties></ThingProperties>
+            <ThingProperties>
+                <Repository>
+                    <Value>
+                    <![CDATA[
+                    GIT_Repository_FR
+                    ]]>
+                    </Value>
+                    <Timestamp>1970-01-01T01:00:00.000+01:00</Timestamp>
+                    <Quality>UNKNOWN</Quality>
+                </Repository>
+                <Projects>
+                    <Value>
+                        <json>
+                        <![CDATA[
+                        {"projects":["LEF.LeFabbriche.PJ","GIT_SourceControl_PJ"]}
+                        ]]>
+                        </json>
+                    </Value>
+                    <Timestamp>2021-04-01T07:00:10.219+02:00</Timestamp>
+                    <Quality>GOOD</Quality>
+                </Projects>
+            </ThingProperties>
         </Thing>
     </Things>
 </Entities>
