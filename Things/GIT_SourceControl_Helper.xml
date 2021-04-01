@@ -79,14 +79,6 @@
                              description=""
                              name="ProjectName"
                              ordinal="2"></FieldDefinition>
-                            <FieldDefinition
-                             aspect.defaultValue="GIT_Repository_FR"
-                             aspect.isRequired="true"
-                             aspect.thingTemplate="FileRepository"
-                             baseType="THINGNAME"
-                             description=""
-                             name="Repository"
-                             ordinal="1"></FieldDefinition>
                         </ParameterDefinitions>
                     </ServiceDefinition>
                     <ServiceDefinition
@@ -110,14 +102,6 @@
                              description=""
                              name="ProjectName"
                              ordinal="2"></FieldDefinition>
-                            <FieldDefinition
-                             aspect.defaultValue="GIT_Repository_FR"
-                             aspect.isRequired="true"
-                             aspect.thingTemplate="FileRepository"
-                             baseType="THINGNAME"
-                             description=""
-                             name="Repository"
-                             ordinal="1"></FieldDefinition>
                         </ParameterDefinitions>
                     </ServiceDefinition>
                 </ServiceDefinitions>
@@ -149,7 +133,7 @@
                                         <code>
                                         <![CDATA[
                                         Resources["SourceControlFunctions"].ExportSourceControlledEntities({
-                                        	repositoryName: Repository,
+                                        	repositoryName: me.Repository,
                                         	path: "/",
                                         	projectName: ProjectName,
                                         	startDate: undefined /* DATETIME */,
@@ -193,7 +177,7 @@
                                         <code>
                                         <![CDATA[
                                         Resources["SourceControlFunctions"].ImportSourceControlledEntities({
-                                        	repositoryName: Repository,
+                                        	repositoryName: me.Repository,
                                         	path: ProjectName,
                                         	useDefaultDataProvider: undefined /* BOOLEAN */,
                                         	withSubsystems: undefined /* BOOLEAN */,
@@ -289,11 +273,11 @@
                     <Value>
                         <json>
                         <![CDATA[
-                        {"projects":["LEF.LeFabbriche.PJ","GIT_SourceControl_PJ"]}
+                        {"projects":["GIT_SourceControl_PJ"]}
                         ]]>
                         </json>
                     </Value>
-                    <Timestamp>2021-04-01T07:00:10.219+02:00</Timestamp>
+                    <Timestamp>2021-04-01T09:13:15.697+02:00</Timestamp>
                     <Quality>GOOD</Quality>
                 </Projects>
             </ThingProperties>
