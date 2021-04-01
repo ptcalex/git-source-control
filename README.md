@@ -16,4 +16,5 @@ The `Projects` property is a JSON string that contains a `projects` key which is
 
 There is no direct GIT interaction yet, but the `init` service of the FileRepository entity generates a PowerShell script that could be used to commit once per minute.
 
+The idea is that each folder under the FileRepository folder in ThingWorx storage should receive a `git init` command so that each minute all changes to a ThingWorx project would be saved in git history.
 
